@@ -3,7 +3,7 @@ RUN apt update && apt -y upgrade && apt-get -q -y install iproute2 tcpdump iputi
 RUN mkdir -p /usr/local/var/run
 COPY bird /usr/local/sbin/bird
 COPY birdc /usr/local/sbin/birdc
-COPY routerid.conf /usr/local/include/birdvars.conf
+COPY birdvars.conf /usr/local/include/birdvars.conf
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["bird",  "-fR"]
