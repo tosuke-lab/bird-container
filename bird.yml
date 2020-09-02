@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: bird
+  namespace: router
+spec:
+  selector:
+    matchLabels:
+      app: bird
+  template:
+    metadata:
+      labels:
+        app: bird
+    spec:
+      containers:
+      - name: bird
+        env:
+        - name: BIRD_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: BIRD_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: BIRD_ML_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: registry.gitlab.com/acnodal/egw-router/bird-egw:2.0.7
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+          requests:
+            cpu: 100m
+            memory: 50Mi
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: false
+        volumeMounts:
+        - name: bird-cm
+          mountPath: /usr/local/etc
+      imagePullSecrets:
+      - name: gitlab
+      volumes:
+      - name: bird-cm
+        configMap:
+          name: bird-cm
+      hostNetwork: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
