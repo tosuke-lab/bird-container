@@ -8,8 +8,8 @@ data:
     # Basic configuration for PureLB Virtual Interface
 
     # Configure logging
-    log syslog all;
-    log "/var/log/bird.log" { debug, trace, info, remote, warning, error, auth, fatal, bug };
+    log stderr all;
+    #log "/var/log/bird.log" { debug, trace, info, remote, warning, error, auth, fatal, bug };
 
     # birdvars is created by docker_entrypoint.  It reads env variables for use in configuration
     include "/usr/local/include/birdvars.conf";
@@ -37,13 +37,15 @@ data:
     # These are needed to establish connectivity on the local network
     # Note that no routes from Birds are exported to the kernel, export defaults to false.
     protocol kernel {
-      ipv4;			
+      ipv4;
+      scan time 10;			
       learn;		
     }
 
     protocol kernel {
-    ipv6;
-        learn;
+      ipv6;
+      scan time 10;
+      learn;
     }
 
     # RIP/RIPNG example
