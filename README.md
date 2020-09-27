@@ -8,14 +8,6 @@ This is a simple packaging of the open source routing software [BIRD](https://bi
 
 The included sample configuration bird-cm.yml imports the routing table entries created when PureLB adds allocated load-balancer addresses to kube-lb0
 
-_Note that the binaries of bird are not located in the directory.  BIRD
- needs to be built on the OS used by the container.  The dockerfile
- assumes that you have built BIRD on an OS matching the FROM ubuntu label 
- and copied the binaries into the dockerfile directory before creating. 
- 
- Only two bird binaries are required, bird and birdc
-
- Built from BIRD 2.0.7_
 
 ## Documentation
 
@@ -36,11 +28,11 @@ https://purelb.gitlab.io/docs
 * Deploy the Bird Router<br/>
 `kubectl apply -f bird.yml`
 
-_Note that the binaries of bird are not located in the directory.  BIRD
- needs to be built on the OS used by the container.  The dockerfile
- assumes that you have built BIRD on an OS matching the FROM ubuntu label 
- and copied the binaries into the dockerfile directory before creating. 
+Note that the binaries of bird are not located in the directory.  BIRD
+needs to be built on the OS used by the container.  The dockerfile
+assumes that you have built BIRD on an OS matching the FROM ubuntu label 
+and copied the binaries into the dockerfile directory before creating. 
  
- Only two bird binaries are required, bird and birdc
+Only two bird binaries are required, bird and birdc
 
- Built from BIRD 2.0.7_
+Built from BIRD 2.0.7
