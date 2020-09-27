@@ -31,11 +31,11 @@ spec:
         imagePullPolicy: Always
         resources:
           limits:
-            cpu: 100m
-            memory: 50Mi
+            cpu: 500m
+            memory: 250Mi
           requests:
-            cpu: 100m
-            memory: 50Mi
+            cpu: 500m
+            memory: 250Mi
         securityContext:
           capabilities:
             add:
@@ -44,8 +44,6 @@ spec:
         volumeMounts:
         - name: bird-cm
           mountPath: /usr/local/etc
-      imagePullSecrets:
-      - name: gitlab
       volumes:
       - name: bird-cm
         configMap:
